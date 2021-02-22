@@ -3,3 +3,5 @@
 ## Instructor
 
 Jonas Schmedtmann
+
+Run `live-server --port=3000` to start the server. Adjust imports in `index.html`.
