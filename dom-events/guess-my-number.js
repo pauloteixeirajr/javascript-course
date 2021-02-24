@@ -2,8 +2,10 @@
 
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
+let highScore = 0;
 const message = document.querySelector('.message');
 const curScore = document.querySelector('.score');
+const curHighScore = document.querySelector('.highscore');
 const body = document.querySelector('body');
 const number = document.querySelector('.number');
 const inputField = document.querySelector('.guess');
@@ -18,6 +20,10 @@ document.querySelector('.check').addEventListener('click', function () {
     number.textContent = secretNumber;
     body.style.backgroundColor = '#60b347';
     number.style.width = '30rem';
+    if (score > highScore) {
+      highScore = score;
+      curHighScore.textContent = highScore;
+    }
   } else if (guess > secretNumber) {
     if (score > 1) {
       message.textContent = '📈 Too high!';
