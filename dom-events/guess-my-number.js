@@ -3,6 +3,7 @@
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highScore = 0;
+
 const message = document.querySelector('.message');
 const curScore = document.querySelector('.score');
 const curHighScore = document.querySelector('.highscore');
@@ -10,13 +11,17 @@ const body = document.querySelector('body');
 const number = document.querySelector('.number');
 const inputField = document.querySelector('.guess');
 
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
 document.querySelector('.check').addEventListener('click', function () {
   const guess = +inputField.value;
 
   if (!guess) {
-    message.textContent = '🚫  No number!';
+    displayMessage('🚫  No number!');
   } else if (guess === secretNumber) {
-    message.textContent = '✅  Correct Number!';
+    displayMessage('✅  Correct Number!');
     number.textContent = secretNumber;
     body.style.backgroundColor = '#60b347';
     number.style.width = '30rem';
@@ -24,22 +29,13 @@ document.querySelector('.check').addEventListener('click', function () {
       highScore = score;
       curHighScore.textContent = highScore;
     }
-  } else if (guess > secretNumber) {
+  } else if (guess !== secretNumber) {
     if (score > 1) {
-      message.textContent = '📈 Too high!';
+      displayMessage(guess > secretNumber ? '📈 Too high!' : '📉 Too low!');
       score--;
       curScore.textContent = score;
     } else {
-      message.textContent = 'You lost the game. :(';
-      curScore.textContent = 0;
-    }
-  } else if (guess < secretNumber) {
-    if (score > 1) {
-      message.textContent = '📉 Too low!';
-      score--;
-      curScore.textContent = score;
-    } else {
-      message.textContent = 'You lost the game. :(';
+      displayMessage('You lost the game. :(');
       curScore.textContent = 0;
     }
   }
@@ -66,7 +62,7 @@ document.querySelector('.again').addEventListener('click', function () {
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
 
-  message.textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
   curScore.textContent = score;
   number.textContent = '?';
   inputField.value = null;
