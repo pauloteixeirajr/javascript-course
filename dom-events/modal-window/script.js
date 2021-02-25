@@ -18,3 +18,8 @@ const openModal = function () {
 btnsOpenModal.forEach((btn) => btn.addEventListener('click', openModal));
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
+
+// Check for ESC key event
+document.addEventListener('keydown', function (ev) {
+  if (ev.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
+});
