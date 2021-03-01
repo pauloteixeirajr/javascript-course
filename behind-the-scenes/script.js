@@ -59,3 +59,33 @@ var numProducts = 10;
 function deleteShoppingCart() {
   console.log('All products deleted!');
 }
+
+// The this keyword
+// Special variable that is created for every execution context (every function)
+// Takes the value of (points to) the 'owner' of the fucntion in which the this keyword is used
+
+console.log(this); // Window object
+
+const newCalcAge = function (birthYear) {
+  console.log(2037 - birthYear);
+  console.log(this); // undefined
+};
+
+newCalcAge(1989);
+
+const newCalcAgeArrow = (birthYear) => {
+  console.log(2037 - birthYear);
+  console.log(this); // Window object (lexical this scope (parent scope))
+};
+
+newCalcAgeArrow(1989);
+
+const paulo = {
+  year: 1989,
+  calcAge: function () {
+    console.log(2037 - this.year);
+    console.log(this); // paulo object
+  },
+};
+
+paulo.calcAge();
