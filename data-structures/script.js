@@ -31,6 +31,49 @@ const restaurants = {
   },
 };
 
+// Spread Operator
+// Creating new arrays
+const spreadArr = [7, 8, 9];
+const newSpreadArr = [5, 6, ...spreadArr];
+// Logs whole array
+console.log(newSpreadArr);
+
+// Values are logged individually
+console.log(...newSpreadArr);
+
+// This creates a new array and does not modify the existing one
+// Does not assign new variables
+const newMenu = [...restaurants.mainMenu, 'Gnocci'];
+console.log(newMenu);
+
+// Create shallow copies of array
+const mainMenuCopy = [...restaurants.mainMenu];
+console.log(mainMenuCopy);
+
+// Merging Arrays
+const fullMenu = [...restaurants.starterMenu, ...restaurants.mainMenu];
+console.log(fullMenu);
+
+// Spread operator works on any iterables
+// Iterables are arrays, strings, maps sets
+// That means we can use spread on strings as well
+const myName = 'Paulo';
+const letters = [...myName, ' ', 'T.'];
+console.log(letters);
+
+// Using spread operator to pass arguments to a function
+const ingredients = ['mushrooms', 'aspargus', 'cheese'];
+function orderPasta(ing1, ing2, ing3) {
+  console.log(ing1, ing2, ing3);
+}
+
+orderPasta(...ingredients);
+
+// Spread operator with object (ES2018)
+const newRestaurant = { ...restaurants, founder: 'Giuseppe', foundedIn: 1989 };
+console.log(newRestaurant);
+
+console.log('\n\n');
 // Destructuring Objects
 const { name, categories, openingHours } = restaurants;
 console.log(name, categories, openingHours);
@@ -73,7 +116,7 @@ restaurants.orderDelivery({
   starterIndex: 3,
 });
 
-console.log('\n');
+console.log('\n\n');
 // Destructuring Arrays
 // Conventional way of retrieving elements in an array
 // and assigning it to a variable
