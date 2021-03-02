@@ -9,8 +9,72 @@ const restaurants = {
   order: function (starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
+  orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time, address }) {
+    console.log('Order Delivery:');
+    console.log(this.starterMenu[starterIndex]);
+    console.log(this.mainMenu[mainIndex]);
+    console.log(`Deliver at ${time} on ${address}`);
+  },
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
 };
 
+// Destructuring Objects
+const { name, categories, openingHours } = restaurants;
+console.log(name, categories, openingHours);
+
+// Changing const names
+const {
+  name: restaurantName,
+  openingHours: hours,
+  categories: tags,
+} = restaurants;
+console.log(restaurantName, hours, tags);
+
+// Default values
+const { menu = [], starterMenu: starters = [] } = restaurants;
+console.log(menu, starters);
+
+// Mutating variables
+let d = 111;
+let e = 999;
+const obj = { d: 23, e: 7, f: 14 };
+// Enclose the code in parenthesis to avoid
+// SyntaxError: Unxpected token '='
+({ d, e } = obj);
+console.log(d, e); // Now outputs 23, 7
+
+// Nested objects destructuring
+const {
+  thu: { open: thuOpen, close: thuClose },
+  fri: { open: friOpen, close: friClose },
+  sat: { open: satOpen, close: satClose },
+} = openingHours;
+console.log(thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
+
+// You can pass it an object as an argument and destructure it in the function declaration
+// See line 12 to understand how the values are being passed into the function.
+restaurants.orderDelivery({
+  time: '22:30',
+  address: 'Via del Sole, 21',
+  mainIndex: 2,
+  starterIndex: 3,
+});
+
+console.log('\n');
+// Destructuring Arrays
 // Conventional way of retrieving elements in an array
 // and assigning it to a variable
 const arr = [2, 3, 4];
