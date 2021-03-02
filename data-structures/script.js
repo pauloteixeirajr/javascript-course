@@ -31,6 +31,34 @@ const restaurants = {
   },
 };
 
+// Rest Pattern & Parameters
+// Rest pack values into an array
+// NOTE: Spread operator is on the RIGHT side of =
+// Rest is on the LEFT side of =
+const [one, two, ...others] = [1, 2, 3, 4, 5];
+console.log(one, two, others); // Results in 1, 2, [3, 4, 5]
+
+// More examples
+const [pizza, , risotto, ...otherFood] = [
+  ...restaurants.mainMenu,
+  ...restaurants.starterMenu,
+];
+console.log(pizza, risotto, otherFood);
+
+// It also works with objects
+const { sat, ...weekdays } = restaurants.openingHours;
+console.log(sat, weekdays);
+
+// Functions Examples
+const add = function (...numbers) {
+  let sum = 0;
+  numbers.forEach((number) => (sum += number));
+  console.log(sum);
+};
+
+add(2, 3, 4, 5);
+
+console.log('\n\n');
 // Spread Operator
 // Creating new arrays
 const spreadArr = [7, 8, 9];
