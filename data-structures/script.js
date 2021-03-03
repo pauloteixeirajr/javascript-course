@@ -31,6 +31,14 @@ const restaurants = {
   },
 };
 
+// Nullish Coalescing Operator ??
+// Checks for nullish (null, undefined) values instead of nullish values
+restaurants.numGuests = 0;
+const newGuests = restaurants.numGuests ?? 10;
+console.log(newGuests);
+
+console.log('\n\n');
+
 // Short Circuiting (&& and ||)
 console.log(3 || 'string'); // 3
 console.log('' || 'string'); // string
