@@ -31,6 +31,23 @@ const restaurants = {
   },
 };
 
+// Short Circuiting (&& and ||)
+console.log(3 || 'string'); // 3
+console.log('' || 'string'); // string
+console.log(true || 0); // true
+console.log(undefined || null); // null
+
+// Easier to assign default values
+const guests = restaurants.numGuests || 10;
+console.log(guests);
+
+console.log(0 && 'string'); // 0
+console.log(7 && 'string'); // string
+
+// Easier to check if property exists in objects
+restaurants.order && restaurants.order(1, 2);
+
+console.log('\n\n');
 // Rest Pattern & Parameters
 // Rest pack values into an array
 // NOTE: Spread operator is on the RIGHT side of =
