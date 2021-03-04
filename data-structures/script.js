@@ -204,3 +204,15 @@ console.log(i, j, k);
 // Setting default values
 const [p = 1, q = 1, r = 1] = [8, 9];
 console.log(p, q, r);
+
+console.log('\n\n');
+// Looping Arrays: The for-of loop
+const menuArr = [...restaurants.starterMenu, ...restaurants.mainMenu];
+
+for (const item of menuArr) console.log(item);
+
+// Using the index with the for-of loop
+for (const item of menuArr.entries()) {
+  const [index, entry] = item;
+  console.log(`${index + 1}: ${entry}`);
+}
