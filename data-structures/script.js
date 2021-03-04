@@ -253,3 +253,18 @@ const newOpeningHours = {
 
 console.log(newOpeningHours);
 newOpeningHours.printHours();
+
+console.log('\n\n');
+
+// Optional chaining
+console.log(restaurants.openingHours.mon); // yields undefined
+//console.log(restaurants.openingHours.mon.open); // throws an error
+
+console.log(restaurants.openingHours.mon?.open);
+console.log(newOpeningHours?.printClosingTime?.());
+newOpeningHours.printHours?.();
+
+for (const day of newWeekdays) {
+  const open = newOpeningHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
