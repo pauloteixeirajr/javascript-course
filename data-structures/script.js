@@ -6,10 +6,10 @@ const restaurants = {
   categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
   starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
   mainMenu: ['Pizza', 'Pasta', 'Risotto'],
-  order: function (starterIndex, mainIndex) {
+  order(starterIndex, mainIndex) {
     return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
   },
-  orderDelivery: function ({ starterIndex = 1, mainIndex = 0, time, address }) {
+  orderDelivery({ starterIndex = 1, mainIndex = 0, time, address }) {
     console.log('Order Delivery:');
     console.log(this.starterMenu[starterIndex]);
     console.log(this.mainMenu[mainIndex]);
@@ -216,3 +216,40 @@ for (const item of menuArr.entries()) {
   const [index, entry] = item;
   console.log(`${index + 1}: ${entry}`);
 }
+
+console.log('\n\n');
+
+// Enhanced Object Literals
+
+const thu = {
+  open: 12,
+  close: 22,
+};
+const newWeekdays = ['mon', 'tue', 'wed'];
+const newOpeningHours = {
+  thu, // variable and property name have the same name, so you can omit the assignment (thu: thu)
+  fri: {
+    open: 11,
+    close: 23,
+  },
+  sat: {
+    open: 0,
+    close: 24,
+  },
+
+  // You can declare functions without a property name inside objects
+  printHours() {
+    console.log(this.thu.open);
+    console.log(this.thu.close);
+  },
+
+  // You can compute property names, instead of manually entering them
+  // Adds a property 'tue' to the object
+  [newWeekdays[1]]: {
+    open: 11,
+    close: 23,
+  },
+};
+
+console.log(newOpeningHours);
+newOpeningHours.printHours();
