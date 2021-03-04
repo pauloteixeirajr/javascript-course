@@ -268,3 +268,22 @@ for (const day of newWeekdays) {
   const open = newOpeningHours[day]?.open ?? 'closed';
   console.log(`On ${day}, we open at ${open}`);
 }
+
+// Looping Objects: Object keys, values and entries
+// Clearing the console to make it easier to read
+console.clear();
+
+// Looping over property names
+for (const day of Object.keys(openingHours)) {
+  console.log(day); // thu, fri, sat
+}
+
+// Looping over property values
+for (const value of Object.values(openingHours)) {
+  console.log(value);
+}
+
+// Looping over the entries (keys and values)
+for (const [key, { open, close }] of Object.entries(openingHours)) {
+  console.log(`On ${key} we open at ${open} and close at ${close}`);
+}
