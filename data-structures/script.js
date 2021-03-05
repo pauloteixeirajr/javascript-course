@@ -287,3 +287,45 @@ for (const value of Object.values(openingHours)) {
 for (const [key, { open, close }] of Object.entries(openingHours)) {
   console.log(`On ${key} we open at ${open} and close at ${close}`);
 }
+
+// Sets (collection of unique values)
+console.clear();
+
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+console.log(ordersSet); // Set(3) {"Pasta", "Pizza", "Risotto"}
+
+// Strings are also iterables
+console.log(new Set('paulo')); // Set(5) {"p", "a", "u", "l", "o"}
+
+// Print the size of Set
+console.log(ordersSet.size); // 3
+
+// Check if an element is in a Set
+console.log(ordersSet.has('Pizza'));
+console.log(ordersSet.has('Bread'));
+
+// Add new items to a Set
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+console.log(ordersSet);
+
+// Remove elements from a Set
+ordersSet.delete('Risotto');
+
+// Clear the Set
+// ordersSet.clear();
+
+// Looping through a Set
+for (const order of ordersSet) console.log(order);
+
+// Convert set to array and vice versa
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)];
+console.log(staffUnique);
