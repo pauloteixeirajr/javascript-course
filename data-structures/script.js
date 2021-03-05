@@ -379,3 +379,32 @@ rest.set(oneTwo, 'Test');
 console.log(rest.get(oneTwo));
 
 rest.set(document.querySelector('h1'), 'Heading');
+
+// Populating map without using the set method
+const questions = new Map([
+  ['question', 'What is the best programming language in the world'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'Javascript'],
+  ['correct', 3],
+  [true, 'Correct!'],
+  [false, 'Try again'],
+]);
+
+console.log(questions);
+
+// Converting objects to maps
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+// Iteration with Maps
+console.log(questions.get('question'));
+for (const [key, value] of questions) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+const answer = 3; // +prompt('Your answer');
+console.log(answer);
+console.log(questions.get(answer === questions.get('correct')));
+
+// Converting map back to array
+console.log([...questions]);
