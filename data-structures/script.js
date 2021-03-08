@@ -408,3 +408,130 @@ console.log(questions.get(answer === questions.get('correct')));
 
 // Converting map back to array
 console.log([...questions]);
+
+// Working With Strings
+// Javascript converts strings into objects in a process called Boxing
+// which makes it possible for you to use methods like length, slice and etc
+// Behind the scenes: new String('content') -> this object string contains the methods
+console.clear();
+const checkMiddleSeat = function (seat) {
+  // B && E are middle seats
+  const s = seat.slice(-1); // Get last character
+  if (s === 'B' || s === 'E') console.log('You got the middle seat');
+  else console.log('You got lucky');
+};
+
+checkMiddleSeat('11B');
+checkMiddleSeat('9A');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+// Fix capitalization in name
+const fixCapitalization = function (name) {
+  const nameLower = passenger.toLowerCase();
+  return nameLower[0].toUpperCase() + nameLower.slice(1);
+};
+const passenger = 'pAulo'; // Paulo
+console.log(fixCapitalization(passenger));
+
+// Comparing email
+const email = 'paulo@hello.io';
+const loginEmail = ' Paulo@Hello.Io \n';
+
+const compareEmails = function (email, loginEmail) {
+  // Trim removes white space
+  const normEmail = loginEmail.toLowerCase().trim();
+  console.log(normEmail);
+  return email === normEmail;
+};
+
+console.log(compareEmails(email, loginEmail));
+
+// Replacing Strings
+const priceIE = '288,97€';
+const priceUS = priceIE.replace('€', '$').replace(',', '.');
+console.log(priceUS);
+
+// You can also replace entire words
+const announcement =
+  'All passengers come to boarding door 23. Boarding door 23!';
+// This replaces only the first instace found
+console.log(announcement.replace('door', 'gate'));
+// To replace all instances
+console.log(announcement.replaceAll('door', 'gate')); // Newest
+console.log(announcement.replace(/door/g, 'gate')); // Regular Expression
+
+// Methods that return boolens
+const plane = 'Airbus A320neo';
+console.log(plane.includes('A320')); // true
+console.log(plane.startsWith('Air')); // true
+console.log(plane.endsWith('neo')); // true
+
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) {
+    console.log('You are not allowed on board!');
+  } else {
+    console.log('Welcome aboard!');
+  }
+};
+
+checkBaggage('I have a laptop, some Food and a pocket Knife');
+checkBaggage('Socks and camera');
+checkBaggage('Got some snacks and a gun for protection');
+
+// Splitting Strings
+// It generates an array with the elements split by the separator you define
+console.log('a+very+nice+string'.split('+')); // ["a", "very", "nice", "string"]
+
+const [firstName, lastName] = 'Paulo Teixeira'.split(' ');
+console.log(firstName, lastName);
+
+// Joining Arrays to Strings
+// As in the split method, you can define the separator
+// be it a space, a symbol or other words
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+// Capitalizing with split & joining
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    // namesUpper.push(n[0].toUpperCase() + n.slice(1).toLowerCase());
+    namesUpper.push(n.replace(n[0], n[0].toUpperCase()));
+  }
+
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName('jessica ann smith davis');
+capitalizeName('paulo teixeira');
+
+// Padding a string
+// Adding characters to a string until the string has desired length
+const message = 'Go to gate 23!';
+console.log(message.padStart(25, '+'));
+console.log(message.padEnd(25, '+'));
+console.log(message.padStart(25, '+').padEnd(30, '+'));
+
+const maskingCreditCard = function (num) {
+  const str = num + '';
+  const last = str.slice(-4);
+  console.log(last.padStart(str.length, '*'));
+};
+
+maskingCreditCard(1234567891234567);
+maskingCreditCard('334859493847755774747');
+
+// Repeating strings
+const wheather = 'Bad weather... All departures delayed... ';
+console.log(wheather.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'🛩'.repeat(n)}`);
+};
+
+planesInLine(4);
+planesInLine(10);
