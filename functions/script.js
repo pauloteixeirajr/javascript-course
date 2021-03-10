@@ -177,3 +177,21 @@ console.log(addTax(0.1, 200));
 const addVAT = addTax.bind(null, 0.23);
 console.log(addVAT(500));
 console.log(addVAT(23));
+
+// Immediately invoked function expressions (IIFE)
+// Used for data encapsulation & hide variables within
+// the IIFE scopes, it is not a feature, but a pattern
+console.clear();
+
+(function () {
+  console.log('This will never run again! Unless you refresh the page');
+})();
+
+(() => console.log('This will also never run again'))();
+
+// You can also use const and let inside blocks
+{
+  const isPrivate = 23;
+}
+
+// console.log(isPrivate); // Throws an error
