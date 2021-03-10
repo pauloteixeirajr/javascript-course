@@ -89,3 +89,54 @@ hey('Steven');
 
 greet('Hello')('John');
 greetArrow('Hi')('Robert');
+
+// The call and apply methods
+console.clear();
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+
+  book(flightNum, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNum}`
+    );
+    this.bookings.push({
+      flight: this.iataCode + flightNum,
+      name,
+    });
+  },
+};
+
+lufthansa.book(239, 'Paulo');
+lufthansa.book(635, 'John');
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+// book(23, 'Sarah'); Does not work
+// Call Method
+// Manually set the this keyword, all the arguments after
+// are the original arguments expected by the function
+book.call(eurowings, 23, 'Sarah');
+book.call(lufthansa, 239, 'Mary');
+
+const swiss = {
+  airline: 'Swiss Airlines',
+  iataCode: 'LX',
+  bookings: [],
+};
+
+book.call(swiss, 583, 'Mary');
+
+// Apply Method
+// Similar to call, but it doesn't receieve the arguments
+// instead it receives one array with all the arguments
+book.apply(swiss, [583, 'George']);
+book.apply(eurowings, [123, 'Jonas']);
