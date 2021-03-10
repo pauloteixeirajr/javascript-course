@@ -140,3 +140,40 @@ book.call(swiss, 583, 'Mary');
 // instead it receives one array with all the arguments
 book.apply(swiss, [583, 'George']);
 book.apply(eurowings, [123, 'Jonas']);
+
+// The bind method
+// The bind method does not immediately execute the function
+// Instead it returns a function where the 'this' keyword is bound
+const bookEW = book.bind(eurowings);
+bookEW(890, 'Steven');
+
+const bookLH = book.bind(lufthansa);
+bookLH(980, 'Johnny');
+
+const bookLX = book.bind(swiss);
+bookLX(789, 'William');
+
+// You can also bind arguments
+const bookEW23 = book.bind(eurowings, 23);
+// So we only need to pass the name
+bookEW23('David');
+
+// Binding with Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  this.planes++;
+  console.log(this.planes);
+};
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application (preset params)
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+// Set the rate param to 0.23, so you can only pass the value
+const addVAT = addTax.bind(null, 0.23);
+console.log(addVAT(500));
+console.log(addVAT(23));
