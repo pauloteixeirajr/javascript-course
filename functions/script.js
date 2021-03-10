@@ -195,3 +195,89 @@ console.clear();
 }
 
 // console.log(isPrivate); // Throws an error
+
+// Closures
+// Closures are not a feature explicitly used
+// It happens automatically in some situations
+// - A clousre is the closed-over variable environment of the execution context
+// in which a function was created, even after that execution context is gone.
+// - A closure gives a function access to all the variables of its parent function,
+// even after that parent function has returned. The function keeps a reference to its outer scope,
+// which preserves the scope chain throughout time.
+// - A clousre makes sure that a function doesn't lose connection to variables that existed
+// at the function's birth place.
+// - A closure is like a backpack that a function carries around wherever it goes.
+// This backpack has all the variables that were present in the envinronment where
+// the function was created.
+console.clear();
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+
+const booker = secureBooking();
+// The booker function can access the variable environment of
+// the execution context in which it was created, making it possible
+// to increment the variable, that is no longer in the call stack.
+booker(); // 1 passengers
+booker(); // 2 passengers
+booker(); // 3 passengers
+
+// You can see the Closure in a function using console.dir()
+console.dir(booker);
+// anonymous()
+// arguments: (...)
+// caller: (...)
+// length: 0
+// name: ""
+// prototype: {constructor: ƒ}
+// __proto__: ƒ ()
+// [[FunctionLocation]]: script.js:217
+// [[Scopes]]: Scopes[3]
+// 0: Closure (secureBooking)
+// passengerCount: 3
+// 1: Script { ...
+
+// More Closure Examples
+let f;
+
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+
+g();
+// f will still use the 'a' variable;
+f(); // 46
+
+h();
+// f will still use the 'b' variable;
+f(); // 1554
+
+// Example 2
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+
+  console.log(`Will start boarding in ${wait} seconds.`);
+};
+
+boardPassengers(180, 3);
