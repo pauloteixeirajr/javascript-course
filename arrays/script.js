@@ -45,3 +45,25 @@ movements.forEach(function (movement, index, array) {
 
   console.log(`Mov ${index + 1}: You ${activity} ${Math.abs(movement)}`);
 });
+
+// forEach with Maps and Sets
+console.clear();
+// Maps
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
+
+// Sets
+const currenciesUnique = new Set(['USD', 'GBP', 'USD', 'EUR', 'EUR']);
+
+currenciesUnique.forEach(function (value, key, set) {
+  // Key is equal the value
+  // set doens't have keys or indexes
+  console.log(`${key}: ${value}`);
+});
