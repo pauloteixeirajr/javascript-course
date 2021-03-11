@@ -78,6 +78,18 @@ const movementsUsd = movements.map(function (mov) {
 const movementsUsdArr = movements.map(mov => mov * eurToUsd);
 console.log(movementsUsd, movementsUsdArr);
 
+// The filter method
+// It generates a brand new array with the logic applied in the callback function
+console.clear();
+const deposits = movements.filter(function (mov) {
+  // Needs to return a boolean value (or a value that will be coerced to Boolean)
+  return mov > 0;
+});
+console.log(deposits);
+
+const withdrawals = movements.filter(mov => mov < 0);
+console.log(withdrawals);
+
 // PROJECT: "Bankist" App
 // Data
 const account1 = {
