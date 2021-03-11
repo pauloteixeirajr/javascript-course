@@ -29,3 +29,19 @@ console.log([...arr, ...arr2]);
 
 // Join method
 console.log(letters.join(' - '));
+
+// Looping arrays: forEach
+console.clear();
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// movement is the current item in the array
+// index is the current index being iterated
+// array is the whole array being iterated
+movements.forEach(function (movement, index, array) {
+  let activity = '';
+  if (movement > 0) activity = 'deposited';
+  else activity = 'withdrew';
+
+  console.log(`Mov ${index + 1}: You ${activity} ${Math.abs(movement)}`);
+});
