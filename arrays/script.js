@@ -68,9 +68,17 @@ currenciesUnique.forEach(function (value, key, set) {
   console.log(`${key}: ${value}`);
 });
 
-// PROJECT: "Bankist" App
+// The map Method
+// It generates a brand new array with the logic applied in the callback function
 console.clear();
+const eurToUsd = 1.1;
+const movementsUsd = movements.map(function (mov) {
+  return mov * eurToUsd;
+});
+const movementsUsdArr = movements.map(mov => mov * eurToUsd);
+console.log(movementsUsd, movementsUsdArr);
 
+// PROJECT: "Bankist" App
 // Data
 const account1 = {
   owner: 'Jonas Schmedtmann',
