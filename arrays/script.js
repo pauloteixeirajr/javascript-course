@@ -90,6 +90,25 @@ console.log(deposits);
 const withdrawals = movements.filter(mov => mov < 0);
 console.log(withdrawals);
 
+// The reduce method
+// Reduces the values in an array to one single value
+console.clear();
+// accumulator -> holds the values computed (snowball)
+const balance = movements.reduce(function (acc, cur, i, arr) {
+  // Iteration 0: 0
+  // Iteration 1: 200
+  // Iteration 2: 650
+  // Iteration 3: 250
+  // Iteration 4: 3250
+  // Iteration 5: 2600
+  // Iteration 6: 2470
+  // Iteration 7: 2540
+  // Total 3840
+  console.log(`Iteration ${i}: ${acc}`);
+  return acc + cur;
+}, 0 /** initial value */);
+console.log(balance);
+
 // PROJECT: "Bankist" App
 // Data
 const account1 = {
