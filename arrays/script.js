@@ -185,6 +185,15 @@ const displayMovements = function (movements) {
   });
 };
 
+const calcDisplayBalance = function (movements) {
+  const balance = movements.reduce((acc, cur) => acc + cur, 0);
+
+  labelBalance.textContent = `${balance}€`;
+};
+
+// Only for testing
+calcDisplayBalance(account1.movements);
+
 const createUsernames = function (accounts) {
   accounts.forEach(account => {
     account.username = account.owner
