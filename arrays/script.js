@@ -126,6 +126,12 @@ const chainedMov = movements
 
 console.log(chainedMov);
 
+// The find method
+// Retrieves one element from an array based on a condition
+console.clear();
+const firstWithdrawal = movements.find(mov => mov < 0);
+console.log(firstWithdrawal); // -400
+
 // PROJECT: "Bankist" App
 // Data
 const account1 = {
