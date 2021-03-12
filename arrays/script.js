@@ -137,3 +137,15 @@ console.log(firstWithdrawal); // -400
 console.clear();
 const firstWithdrawalIndex = movements.findIndex(mov => mov < 0);
 console.log(firstWithdrawalIndex); // 2
+
+// The some method
+// Similar to includes method, but it allows you check for a condition instead of equality
+// Checks if any elements in the array match the criteria in the callback function
+console.clear();
+const anyDeposits = movements.some(mov => mov > 100);
+console.log(anyDeposits); // true
+
+// The every method
+// Only returns true if ALL elements in the array satisfy the condition we pass in
+console.log(movements.every(mov => mov > 0)); // false
+console.log([430, 1000, 700, 50, 90].every(mov => mov > 0)); // true

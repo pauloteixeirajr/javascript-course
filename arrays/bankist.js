@@ -168,6 +168,19 @@ btnTransfer.addEventListener('click', function (event) {
   inputTransferAmount.value = inputTransferTo.value = '';
 });
 
+btnLoan.addEventListener('click', function (event) {
+  event.preventDefault();
+  const amount = +inputLoanAmount.value;
+
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    console.log('Grant the loan');
+    currentAccount.movements.push(amount);
+    updateUI(currentAccount);
+  }
+
+  inputLoanAmount.value = '';
+});
+
 btnClose.addEventListener('click', function (event) {
   event.preventDefault();
   if (
