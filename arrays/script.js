@@ -149,3 +149,13 @@ console.log(anyDeposits); // true
 // Only returns true if ALL elements in the array satisfy the condition we pass in
 console.log(movements.every(mov => mov > 0)); // false
 console.log([430, 1000, 700, 50, 90].every(mov => mov > 0)); // true
+
+// The flat method
+// It flattens the array
+const nested = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(nested.flat()); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat()); // [Array(2), 3, 4, Array(2), 7, 8]
+// You can pass a depth argument to specify how deep the array should be flattened
+console.log(arrDeep.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8]
