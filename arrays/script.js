@@ -109,6 +109,23 @@ const balance = movements.reduce(function (acc, cur, i, arr) {
 }, 0 /** initial value */);
 console.log(balance);
 
+// The magic of chaining methods
+// You can only chain methods that return an array
+console.clear();
+
+// Pipeline
+const chainedMov = movements
+  .filter(mov => mov > 0)
+  // .map(mov => mov * eurToUsd)
+  .map((mov, i, arr) => {
+    // arr != movements, since filter returns a new array
+    console.log(arr, arr.length);
+    return mov * eurToUsd;
+  })
+  .reduce((acc, cur) => acc + cur, 0);
+
+console.log(chainedMov);
+
 // PROJECT: "Bankist" App
 // Data
 const account1 = {
