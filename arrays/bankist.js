@@ -214,11 +214,11 @@ const totalBalance = accounts
   .map(acc => acc.movements)
   .flat()
   .reduce((acc, cur) => acc + cur, 0);
-console.log(totalBalance);
+// console.log(totalBalance);
 
 // Using flatMap
 // flatMap only goes one level deep
 const totalBalance2 = accounts
   .flatMap(acc => acc.movements)
   .reduce((acc, cur) => acc + cur, 0);
-console.log(totalBalance);
+// console.log(totalBalance);

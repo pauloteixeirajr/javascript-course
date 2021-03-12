@@ -186,3 +186,41 @@ console.log(movements.sort((a, b) => a - b));
 
 // Descending
 console.log(movements.sort((a, b) => b - a));
+
+// More ways of creating and filling arrays
+console.clear();
+console.log([1, 2, 3, 4, 5, 6, 7]);
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+// Whenever you only pass one argument, it creates a new empty array with the passed length
+// You can only call one method in the empty array
+const seven = new Array(7);
+console.log(seven); // [empty × 7]
+
+// The fill method
+seven.fill(1);
+console.log(seven); // [1, 1, 1, 1, 1, 1, 1]
+
+seven.fill(2, 3, 5);
+console.log(seven); // [1, 1, 1, 2, 2, 1, 1]
+
+// the Array.from method
+// You can pass any iterables to create a new array
+console.log(Array.from({ length: 7 }, () => 1)); // [1, 1, 1, 1, 1, 1, 1]
+console.log(Array.from({ length: 7 }, (_, i) => 1 + i)); // [1, 2, 3, 4, 5, 6, 7]
+
+// 100 random dice rolls
+console.log(
+  Array.from({ length: 100 }, () => Math.trunc(Math.random() * 6) + 1)
+);
+
+document
+  .querySelector('.balance__value')
+  .addEventListener('click', function () {
+    const movUI = Array.from(
+      document.querySelectorAll('.movements__value'),
+      // Callback function
+      div => +div.textContent.replace('€', '')
+    );
+    console.log(movUI);
+  });
