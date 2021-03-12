@@ -159,3 +159,30 @@ const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
 console.log(arrDeep.flat()); // [Array(2), 3, 4, Array(2), 7, 8]
 // You can pass a depth argument to specify how deep the array should be flattened
 console.log(arrDeep.flat(2)); // [1, 2, 3, 4, 5, 6, 7, 8]
+
+// Sorting Arrays
+// It mutates the original array
+console.clear();
+// Strings
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort()); // sorts alphabetically
+
+// Numbers
+// sorts based on strings, so the sorting is incorrect
+console.log(movements.sort());
+
+// Pass a compare callback function to sort the numbers
+// return < 0, A before B
+// return > 0, B before A
+console.log(
+  movements.sort((a, b) => {
+    if (a > b) return 1;
+    if (b > a) return -1;
+  })
+);
+
+// Ascending
+console.log(movements.sort((a, b) => a - b));
+
+// Descending
+console.log(movements.sort((a, b) => b - a));
