@@ -122,3 +122,36 @@ console.log(BigInt(483843022483420438234083948394483204));
 console.log(10000n + 10000n);
 
 // You cannot mix BigInts with other types
+
+// Creating Dates
+console.clear();
+// How to create dates
+const now = new Date();
+console.log(now);
+
+// With strings
+console.log(new Date('Sun Aug 02 2020 18:05:41'));
+console.log(new Date('December 24, 2015'));
+console.log(new Date('2021-11-18T21:30:00.178Z'));
+
+// With year, month, day, hour, min, sec and etc values
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+// JS will autocorrect dates that do not exist
+console.log(new Date(2037, 10, 31)); // Dec 01
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// Dates methods
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+
+// Get current timestamp
+console.log(Date.now());
