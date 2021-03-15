@@ -89,3 +89,21 @@ console.log((2.7).toFixed(0)); // 3
 console.log((2.7).toFixed(1)); // 2.7
 console.log((2.7).toFixed(2)); // 2.70
 console.log((2.7).toFixed(3)); // 2.700
+
+// The Remainder Operator
+// It returns the remainder of a division
+console.clear();
+
+console.log(5 % 2); // 1
+console.log(8 % 3); // 2
+console.log(4 % 2); // 0
+
+// Checking if numbers are even or odds with the remainder operator
+const isEven = n => n % 2 === 0;
+
+console.log(isEven(1)); // false
+console.log(isEven(2)); // true
+console.log(isEven(3)); // false
+console.log(isEven(4)); // true
+console.log(isEven(5)); // false
+console.log(isEven(6)); // true

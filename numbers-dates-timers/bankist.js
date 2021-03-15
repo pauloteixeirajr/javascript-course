@@ -219,3 +219,10 @@ btnSort.addEventListener('click', function (event) {
   sorted = !sorted;
   displayMovements(currentAccount.movements, sorted);
 });
+
+labelBalance.addEventListener('click', function () {
+  // Changes the colour of even rows
+  [...document.querySelectorAll('.movements__row')].forEach(function (row, i) {
+    if (i % 2 === 0) row.style.backgroundColor = '#ddd';
+  });
+});
