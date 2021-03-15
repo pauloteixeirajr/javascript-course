@@ -118,5 +118,7 @@ console.log(Number.MAX_SAFE_INTEGER);
 console.log(483843022483420438234083948394483204n);
 console.log(BigInt(483843022483420438234083948394483204));
 
-// Operations
+// Operations works the same
 console.log(10000n + 10000n);
+
+// You cannot mix BigInts with other types
