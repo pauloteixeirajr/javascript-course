@@ -155,3 +155,8 @@ console.log(future.toISOString());
 
 // Get current timestamp
 console.log(Date.now());
+
+// Operations with Dates
+console.clear();
+console.log(+future);
+console.log(+future - +now);
