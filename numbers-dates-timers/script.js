@@ -180,3 +180,32 @@ console.log(
   'Browser:',
   new Intl.NumberFormat(navigator.language, options).format(num)
 );
+
+// Timers: setTimeout (runs only once after x seconds)
+console.clear();
+
+const ingredients = ['olives', 'eggs'];
+
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}`),
+  3000,
+  // List of arguments
+  ...ingredients
+);
+console.log('Waiting...');
+
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+// Timers: setInterval (runs every x seconds)
+const clockTimer = setInterval(() => {
+  const now = new Date();
+  console.log(
+    new Intl.DateTimeFormat('en-GB', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    }).format(now)
+  );
+}, 1000);
+
+clearInterval(clockTimer);

@@ -255,10 +255,12 @@ btnLoan.addEventListener('click', function (event) {
   const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    currentAccount.movements.push(amount);
-    // Add transfer date
-    currentAccount.movementsDates.push(new Date().toISOString());
-    updateUI(currentAccount);
+    setTimeout(() => {
+      currentAccount.movements.push(amount);
+      // Add transfer date
+      currentAccount.movementsDates.push(new Date().toISOString());
+      updateUI(currentAccount);
+    }, 2500);
   }
 
   inputLoanAmount.value = '';
