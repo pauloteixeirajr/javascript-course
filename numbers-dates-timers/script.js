@@ -160,3 +160,23 @@ console.log(Date.now());
 console.clear();
 console.log(+future);
 console.log(+future - +now);
+
+// Internationalizing Numbers
+const num = 3884764.23;
+const options = {
+  style: 'currency',
+  currency: 'EUR',
+  // useGrouping: false,
+  // style: 'percent',
+  // style: 'unit',
+  // unit: 'mile-per-hour',
+  // unit: 'celsius',
+};
+
+console.log('US:', new Intl.NumberFormat('en-US', options).format(num));
+console.log('DE:', new Intl.NumberFormat('de-DE', options).format(num));
+console.log('SY:', new Intl.NumberFormat('ar-SY', options).format(num));
+console.log(
+  'Browser:',
+  new Intl.NumberFormat(navigator.language, options).format(num)
+);

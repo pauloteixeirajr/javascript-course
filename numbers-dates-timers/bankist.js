@@ -83,6 +83,13 @@ const formatMovementDate = function (date, locale) {
   return new Intl.DateTimeFormat(locale).format(date);
 };
 
+const formatCurr = function (value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
+};
+
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -96,13 +103,15 @@ const displayMovements = function (acc, sort = false) {
     const date = new Date(acc.movementsDates[idx]);
     const displayDate = formatMovementDate(date, acc.locale);
 
+    const formattedMov = formatCurr(mov, acc.locale, acc.currency);
+
     const row = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">
         ${idx + 1} ${type}
       </div>
       <div class="movements__date">${displayDate}</div>
-      <div class="movements__value">${mov.toFixed(2)}€</div>
+      <div class="movements__value">${formattedMov}</div>
     </div>`;
 
     containerMovements.insertAdjacentHTML('afterbegin', row);
@@ -111,8 +120,11 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce((acc, cur) => acc + cur, 0);
-
-  labelBalance.textContent = `${account.balance.toFixed(2)}€`;
+  labelBalance.textContent = formatCurr(
+    account.balance,
+    account.locale,
+    account.currency
+  );
 };
 
 const calcDisplaySummary = function (account) {
@@ -131,9 +143,21 @@ const calcDisplaySummary = function (account) {
     .filter(int => int >= 1)
     .reduce((acc, cur) => acc + cur, 0);
 
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumIn.textContent = formatCurr(
+    incomes,
+    account.locale,
+    account.currency
+  );
+  labelSumOut.textContent = formatCurr(
+    Math.abs(out),
+    account.locale,
+    account.currency
+  );
+  labelSumInterest.textContent = formatCurr(
+    interest,
+    account.locale,
+    account.currency
+  );
 };
 
 const createUsernames = function (accounts) {
