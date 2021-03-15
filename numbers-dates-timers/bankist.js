@@ -183,13 +183,37 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
-// Event Handlers
-let currentAccount;
+const startLogoutTimer = function () {
+  // Set time to 5 minutes
+  let time = 120;
 
-// Fake always logged in
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.opacity = 100;
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+
+    // In each call, print the remaining time to the UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // When 0 seconds, stop timer and log out user
+    if (time === 0) {
+      clearInterval(logoutTimer);
+      currentAccount = null;
+      labelWelcome.textContent = 'Log in to get started';
+      containerApp.style.opacity = 0;
+    }
+    // Decrease 1 second
+    time--;
+  };
+
+  tick();
+  // Call the timer every second
+  const logoutTimer = setInterval(tick, 1000);
+
+  return logoutTimer;
+};
+
+// Event Handlers
+let currentAccount, timer;
 
 btnLogin.addEventListener('click', function (event) {
   // Prevent form from submitting
@@ -222,6 +246,8 @@ btnLogin.addEventListener('click', function (event) {
     // Clear inputs fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+    if (timer) clearInterval(timer);
+    timer = startLogoutTimer();
 
     updateUI(currentAccount);
   }
@@ -246,6 +272,10 @@ btnTransfer.addEventListener('click', function (event) {
     reciever.movementsDates.push(new Date().toISOString());
 
     updateUI(currentAccount);
+
+    // Reset the timer
+    clearInterval(timer);
+    timer = startLogoutTimer();
   }
   inputTransferAmount.value = inputTransferTo.value = '';
 });
@@ -260,6 +290,9 @@ btnLoan.addEventListener('click', function (event) {
       // Add transfer date
       currentAccount.movementsDates.push(new Date().toISOString());
       updateUI(currentAccount);
+      // Reset the timer
+      clearInterval(timer);
+      timer = startLogoutTimer();
     }, 2500);
   }
 
