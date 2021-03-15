@@ -40,3 +40,52 @@ console.log(Number.isFinite(23 / 0)); // false
 console.log(Number.isInteger(23)); // true
 console.log(Number.isInteger(23.0)); // true
 console.log(Number.isInteger(23 / 0)); // false
+
+// Math and Rounding
+console.clear();
+// Square Root
+console.log(Math.sqrt(25)); // 5
+// You can also use exponential to calc sqrt
+console.log(25 ** (1 / 2)); // 5
+console.log(8 ** (1 / 3)); // 2
+
+// Getting the maximum & minimum values
+console.log(Math.max(5, 15, 23, 11, 2));
+console.log(Math.max(5, 15, '23', 11, 2));
+
+console.log(Math.min(5, 15, 23, 11, 2));
+console.log(Math.min(5, 15, '23', 11, 2));
+
+// Constants in the Math object
+console.log(Math.PI);
+// Calculating area of a circle
+console.log(Math.PI * Number.parseFloat('10px') ** 2);
+
+// Random function
+console.log(Math.random());
+console.log(Math.trunc(Math.random() * 6) + 1);
+
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min;
+console.log(randomInt(10, 20));
+
+// Rounding Integers
+// Removes decimals
+console.log(Math.trunc(23.3)); // 23
+
+// Rounds to the nearest integer
+console.log(Math.round(23.9)); // 24
+console.log(Math.ceil(23.9)); // 24
+
+// Floors to the nearest integer
+console.log(Math.floor(23.9)); // 23
+
+// Negative numbers
+console.log(Math.trunc(-23.3)); // -23
+console.log(Math.floor(-23.3)); // -24
+
+// Rounding decimals (toFixed returns a string)
+console.log((2.7).toFixed(0)); // 3
+console.log((2.7).toFixed(1)); // 2.7
+console.log((2.7).toFixed(2)); // 2.70
+console.log((2.7).toFixed(3)); // 2.700

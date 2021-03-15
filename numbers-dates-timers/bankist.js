@@ -82,7 +82,7 @@ const displayMovements = function (movements, sort = false) {
       <div class="movements__type movements__type--${type}">
         ${idx + 1} ${type}
       </div>
-      <div class="movements__value">${mov}€</div>
+      <div class="movements__value">${mov.toFixed(2)}€</div>
     </div>`;
 
     containerMovements.insertAdjacentHTML('afterbegin', row);
@@ -92,7 +92,7 @@ const displayMovements = function (movements, sort = false) {
 const calcDisplayBalance = function (account) {
   account.balance = account.movements.reduce((acc, cur) => acc + cur, 0);
 
-  labelBalance.textContent = `${account.balance}€`;
+  labelBalance.textContent = `${account.balance.toFixed(2)}€`;
 };
 
 const calcDisplaySummary = function (account) {
@@ -111,9 +111,9 @@ const calcDisplaySummary = function (account) {
     .filter(int => int >= 1)
     .reduce((acc, cur) => acc + cur, 0);
 
-  labelSumIn.textContent = `${incomes}€`;
-  labelSumOut.textContent = `${Math.abs(out)}€`;
-  labelSumInterest.textContent = `${interest}€`;
+  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
+  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
 };
 
 const createUsernames = function (accounts) {
@@ -185,7 +185,7 @@ btnTransfer.addEventListener('click', function (event) {
 
 btnLoan.addEventListener('click', function (event) {
   event.preventDefault();
-  const amount = +inputLoanAmount.value;
+  const amount = Math.floor(inputLoanAmount.value);
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     currentAccount.movements.push(amount);
