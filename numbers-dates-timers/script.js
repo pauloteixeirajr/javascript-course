@@ -107,3 +107,16 @@ console.log(isEven(3)); // false
 console.log(isEven(4)); // true
 console.log(isEven(5)); // false
 console.log(isEven(6)); // true
+
+// Working with BigInt
+console.clear();
+console.log(2 ** 53 - 1); // The biggest number JS can safely represent
+console.log(Number.MAX_SAFE_INTEGER);
+
+// ES 2020 introduced BigInt
+// Add n to the end of the number to convert it to BigInt
+console.log(483843022483420438234083948394483204n);
+console.log(BigInt(483843022483420438234083948394483204));
+
+// Operations
+console.log(10000n + 10000n);
