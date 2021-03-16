@@ -48,3 +48,24 @@ btnScrollTo.addEventListener('click', function (e) {
   // Modern browsers
   section1.scrollIntoView({ behavior: 'smooth' });
 });
+
+// Page Navigation
+// document.querySelectorAll('.nav__link').forEach(el => {
+//   el.addEventListener('click', function (e) {
+//     e.preventDefault();
+
+//     const id = this.getAttribute('href');
+//     document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+//   });
+// });
+
+// With Event Delegation
+// Add event listener to common parent element
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  // Determine which element originated the event
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({ behavior: 'smooth' });
+  }
+});
