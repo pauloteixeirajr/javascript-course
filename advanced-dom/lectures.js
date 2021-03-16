@@ -72,3 +72,22 @@ console.log(logo.dataset.version);
 // logo.classList.toggle('test');
 // logo.classList.contains('test');
 console.clear();
+
+// Types of Events and Events Handlers
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  // Hover over element
+  console.log('AddEventListener: Great, you are reading the heading!');
+
+  // Removing event handlers
+  h1.removeEventListener('mouseenter', alertH1);
+};
+
+h1.addEventListener('mouseenter', alertH1);
+
+// Not common
+h1.onmouseenter = function (e) {
+  // Hover over element
+  console.log('onmouseenter: Great, you are reading the heading!');
+};
