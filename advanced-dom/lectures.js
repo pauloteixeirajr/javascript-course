@@ -71,3 +71,4 @@ console.log(logo.dataset.version);
 // logo.classList.remove('test');
 // logo.classList.toggle('test');
 // logo.classList.contains('test');
+console.clear();
