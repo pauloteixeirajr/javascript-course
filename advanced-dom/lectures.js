@@ -33,3 +33,41 @@ document
   .addEventListener('click', function () {
     message.remove();
   });
+
+// Styles
+console.clear();
+message.style.backgroundColor = '#37383d';
+message.style.width = '106.9%';
+
+// To get a computed style (in stylesheets) use the built-in function
+console.log(getComputedStyle(message).color);
+console.log(getComputedStyle(message).height);
+
+message.style.height =
+  Number.parseInt(getComputedStyle(message).height) + 40 + 'px';
+
+// Setting CSS Variables (Custom properties) with setProperty
+document.documentElement.style.setProperty('--color--primary', 'orangered');
+
+// Attributes
+// src alt class id and etc
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
+
+// You can also use getAttribute
+console.log(logo.getAttribute('alt'));
+
+// You can also set values
+logo.alt = 'Beautiful minimalist logo';
+logo.setAttribute('alt', 'Bankist logo');
+
+// Data attributes
+console.log(logo.dataset.version);
+
+// Classes
+// logo.classList.add('test');
+// logo.classList.remove('test');
+// logo.classList.toggle('test');
+// logo.classList.contains('test');
