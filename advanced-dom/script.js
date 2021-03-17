@@ -166,7 +166,7 @@ const sectionObserver = new IntersectionObserver(revealSection, {
 });
 allSections.forEach(section => {
   sectionObserver.observe(section);
-  section.classList.add('section--hidden');
+  // section.classList.add('section--hidden');
 });
 
 // Lazy Loading Images
@@ -187,3 +187,74 @@ const imgObserver = new IntersectionObserver(
 );
 
 imgTargets.forEach(img => imgObserver.observe(img));
+
+// Building a slider component
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+let currSlide = 0;
+
+const activateDot = function (slide) {
+  document
+    .querySelectorAll('.dots__dot')
+    .forEach(d => d.classList.remove('dots__dot--active'));
+  document
+    .querySelector(`.dots__dot[data-slide="${slide}"]`)
+    .classList.add('dots__dot--active');
+};
+
+const goToSlide = function (slide = 0) {
+  slides.forEach((s, i) => {
+    s.style.transform = `translateX(${(i - slide) * 100}%)`;
+  });
+};
+
+goToSlide();
+// Next slide
+const nextSlide = function () {
+  if (currSlide === slides.length - 1) currSlide = 0;
+  else currSlide++;
+
+  goToSlide(currSlide);
+  activateDot(currSlide);
+};
+btnRight.addEventListener('click', nextSlide);
+
+// Previous slide
+const prevSlide = function () {
+  if (currSlide === 0) currSlide = slides.length - 1;
+  else currSlide--;
+
+  goToSlide(currSlide);
+  activateDot(currSlide);
+};
+btnLeft.addEventListener('click', prevSlide);
+
+// Navigating with keyboard keys
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'ArrowLeft') prevSlide();
+  if (e.key === 'ArrowRight') nextSlide();
+});
+
+// Dots Navigation
+const dotContainer = document.querySelector('.dots');
+
+const createDots = function () {
+  slides.forEach((_, i) => {
+    dotContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class="dots__dot" data-slide="${i}"></button>`
+    );
+  });
+};
+createDots();
+
+dotContainer.addEventListener('click', function (e) {
+  if (!e.target.classList.contains('dots__dot')) return;
+  const { slide } = e.target.dataset;
+  currSlide = +slide;
+  goToSlide(slide);
+  activateDot(slide);
+});
+
+activateDot(0);
