@@ -168,3 +168,22 @@ allSections.forEach(section => {
   sectionObserver.observe(section);
   section.classList.add('section--hidden');
 });
+
+// Lazy Loading Images
+const imgTargets = document.querySelectorAll('img[data-src]');
+
+const imgObserver = new IntersectionObserver(
+  function ([entry], observer) {
+    if (!entry.isIntersecting) return;
+
+    // Replace src with data-src
+    entry.target.src = entry.target.dataset.src;
+    entry.target.addEventListener('load', function () {
+      this.classList.remove('lazy-img');
+    });
+    observer.unobserve(entry.target);
+  },
+  { root: null, threshold: 0, rootMargin: '-200px' }
+);
+
+imgTargets.forEach(img => imgObserver.observe(img));
