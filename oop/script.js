@@ -7,6 +7,7 @@ const Person = function (name, birthYear) {
 
   // Do not create a method inside a constructor function
   // 1000 objects = 1000 functions (bad performance)
+  // Use prototype instead
   // this.calcAge = function () {
   //   console.log(2037 - this.birthYear);
   // };
@@ -21,3 +22,21 @@ console.log(matilda);
 console.log(jack);
 
 console.log(paulo instanceof Person); // true
+
+// Prototypes
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+Person.prototype.species = 'Homo Sapiens';
+
+paulo.calcAge();
+matilda.calcAge();
+jack.calcAge();
+
+console.log(paulo.species, matilda.species, jack.species);
+console.log(paulo.hasOwnProperty('name'));
+console.log(paulo.hasOwnProperty('species')); // false
+
+console.log(paulo.__proto__ === Person.prototype);
+console.log(Person.prototype.isPrototypeOf(paulo));
