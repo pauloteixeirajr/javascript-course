@@ -258,3 +258,22 @@ dotContainer.addEventListener('click', function (e) {
 });
 
 activateDot(0);
+
+// Lifecycle DOM Events
+document.addEventListener('DOMContentLoaded', function (e) {
+  // Does not wait for images and external links to be loaded
+  // It only waits for Javascript and CSS to be loaded
+  console.log('HTML parsed and DOM tree built!', e);
+});
+
+window.addEventListener('load', function (e) {
+  // Waits for all images, scripts, styles to load
+  console.log('Page fully loaded', e);
+});
+
+// window.addEventListener('beforeunload', function (e) {
+//   // Before a user is about to leave the page
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
