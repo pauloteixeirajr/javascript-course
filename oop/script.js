@@ -94,6 +94,11 @@ class PersonES6 {
     if (name.includes(' ')) this._name = name;
     else console.log(`${name} is not a full name`);
   }
+
+  static hey() {
+    console.log('Hey there!!');
+    console.dir(this);
+  }
 }
 
 const johnny = new PersonES6('Johnny', 1963);
@@ -119,3 +124,17 @@ const account = {
 // Don't call the method
 console.log(account.latest);
 account.latest = 400;
+
+console.clear();
+// Static Methods
+// Methods that are executed from the constructor
+// and not from an instance of a class
+// Array.from works
+// Array().from doesn't work
+Person.hey = function () {
+  console.log('Hey there!');
+};
+
+Person.hey();
+PersonES6.hey();
+// paulo.hey(); throws an error
