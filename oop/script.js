@@ -81,6 +81,41 @@ class PersonES6 {
   greet() {
     console.log(`Hey ${this.name}`);
   }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  get fullName() {
+    return this._name;
+  }
+
+  set fullName(name) {
+    if (name.includes(' ')) this._name = name;
+    else console.log(`${name} is not a full name`);
+  }
 }
 
 const johnny = new PersonES6('Johnny', 1963);
+
+console.log(johnny.age);
+johnny.fullName = 'Johnny Davis';
+
+const walter = new PersonES6('Walter', 1965);
+
+// Setters and Getters
+const account = {
+  owner: 'Paulo',
+  movements: [200, 530, 120, 300],
+  get latest() {
+    return this.movements.slice(-1).pop();
+  },
+
+  set latest(mov) {
+    this.movements.push(mov);
+  },
+};
+
+// Don't call the method
+console.log(account.latest);
+account.latest = 400;
