@@ -59,3 +59,28 @@ console.log(h1.__proto__);
 
 // Functions
 console.dir(x => x + 1);
+
+console.clear();
+// ES6 Classes
+// Things to consider
+// 1. Classes are NOT hoisted
+// 2. Classes are first-class citizens
+// 3. Classes are executed in strict mode
+class PersonES6 {
+  constructor(name, birthYear) {
+    // In the object itself
+    this.name = name;
+    this.birthYear = birthYear;
+  }
+
+  // In the Prototype
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.name}`);
+  }
+}
+
+const johnny = new PersonES6('Johnny', 1963);
