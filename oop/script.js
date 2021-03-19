@@ -208,3 +208,19 @@ class StudentES6 extends PersonES6 {
 const martha = new StudentES6('Martha Jones', 2012, 'Computer Science');
 martha.introduce();
 martha.calcAge();
+
+console.clear();
+// Inheritance between classes: Object.create
+// Using PersonProto defined above
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2008, 'Data Science');
+jay.introduce();
+jay.calcAge();
