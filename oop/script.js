@@ -232,13 +232,18 @@ class Account {
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this.pin = pin;
-    this.movements = [];
+    this._pin = pin;
+    // protected property (you can still access)
+    this._movements = [];
     this.locale = navigator.language;
   }
 
+  getMovements() {
+    return this._movements;
+  }
+
   deposit(mov) {
-    this.movements.push(mov);
+    this._movements.push(mov);
   }
 
   withdraw(mov) {
@@ -252,3 +257,4 @@ acc1.deposit(400);
 acc1.withdraw(100);
 
 console.log(acc1);
+console.log(acc1.getMovements());
