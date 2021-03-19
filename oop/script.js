@@ -184,3 +184,27 @@ const mike = new Student('Mike', 2020, 'Computer Science');
 mike.introduce();
 mike.calcAge();
 console.log(mike.species);
+
+// Inheritance between classes: ES6 Classes
+console.clear();
+class StudentES6 extends PersonES6 {
+  constructor(firstName, birthYear, course) {
+    // Super needs to happen first always
+    super(firstName, birthYear);
+    this.course = course;
+  }
+
+  introduce() {
+    console.log(`My name is ${this.name} and I study ${this.course}`);
+  }
+
+  calcAge() {
+    console.log(
+      `I'm ${this.age} years old, but I feel more like ${this.age + 10}`
+    );
+  }
+}
+
+const martha = new StudentES6('Martha Jones', 2012, 'Computer Science');
+martha.introduce();
+martha.calcAge();
