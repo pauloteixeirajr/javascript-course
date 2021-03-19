@@ -161,3 +161,26 @@ steven.calcAge();
 const sarah = Object.create(PersonProto);
 sarah.init('Sarah', 1979);
 sarah.calcAge();
+
+// Inheritance Between "Classes": Constructor Functions
+console.clear();
+
+const Student = function (firstName, birthYear, course) {
+  // Executes the Person function
+  // But keep the this keyword bound to the Student Object
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// You have to use Object.create to change the object the reference
+Student.prototype = Object.create(Person.prototype);
+Student.prototype.constructor = Student;
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.name} and I study ${this.course}`);
+};
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+mike.introduce();
+mike.calcAge();
+console.log(mike.species);
