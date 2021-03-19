@@ -224,3 +224,31 @@ const jay = Object.create(StudentProto);
 jay.init('Jay', 2008, 'Data Science');
 jay.introduce();
 jay.calcAge();
+
+// Another Class Example
+console.clear();
+
+class Account {
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.pin = pin;
+    this.movements = [];
+    this.locale = navigator.language;
+  }
+
+  deposit(mov) {
+    this.movements.push(mov);
+  }
+
+  withdraw(mov) {
+    this.deposit(-mov);
+  }
+}
+
+const acc1 = new Account('Paulo', 'EUR', 1111);
+acc1.deposit(300);
+acc1.deposit(400);
+acc1.withdraw(100);
+
+console.log(acc1);
