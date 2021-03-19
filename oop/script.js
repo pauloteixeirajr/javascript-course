@@ -229,25 +229,41 @@ jay.calcAge();
 console.clear();
 
 class Account {
+  // Public fields
+  locale = navigator.language;
+
+  // Private fields
+  #movements = [];
+  #pin;
+
   constructor(owner, currency, pin) {
     this.owner = owner;
     this.currency = currency;
-    this._pin = pin;
-    // protected property (you can still access)
-    this._movements = [];
-    this.locale = navigator.language;
+    this.#pin = pin;
   }
 
   getMovements() {
-    return this._movements;
+    return this.#movements;
   }
 
   deposit(mov) {
-    this._movements.push(mov);
+    this.#movements.push(mov);
   }
 
   withdraw(mov) {
     this.deposit(-mov);
+  }
+
+  requestLoan(val) {
+    if (this.#approveLoan(val)) {
+      this.deposit(val);
+      console.log('Loan approved');
+    }
+  }
+
+  // Private methods
+  #approveLoan(val) {
+    return true;
   }
 }
 
