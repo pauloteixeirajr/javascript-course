@@ -22,6 +22,7 @@ const inputDistance = document.querySelector('.form__input--distance');
 const inputDuration = document.querySelector('.form__input--duration');
 const inputCadence = document.querySelector('.form__input--cadence');
 const inputElevation = document.querySelector('.form__input--elevation');
+let map, mapEvent;
 
 if ('geolocation' in navigator) {
   navigator.geolocation.getCurrentPosition(
@@ -31,27 +32,16 @@ if ('geolocation' in navigator) {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
       const { latitude, longitude } = position.coords;
       const coords = [latitude, longitude];
-      const map = L.map('map').setView(coords, 13);
+      map = L.map('map').setView(coords, 15);
 
       L.tileLayer(tileLayer, {
         attribution: footNote,
       }).addTo(map);
 
-      map.on('click', function (mapEvent) {
-        const { lat, lng } = mapEvent.latlng;
-        L.marker([lat, lng])
-          .addTo(this)
-          .bindPopup(
-            L.popup({
-              maxWidth: 250,
-              minWidth: 100,
-              autoClose: false,
-              closeOnClick: false,
-              className: 'running-popup',
-            })
-          )
-          .setPopupContent('Running Workout')
-          .openPopup();
+      map.on('click', function (ev) {
+        mapEvent = ev;
+        form.classList.remove('hidden');
+        inputDistance.focus();
       });
     },
     error => {
@@ -59,3 +49,33 @@ if ('geolocation' in navigator) {
     }
   );
 }
+
+// Form Event Handler
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  // Show marker
+  const { lat, lng } = mapEvent.latlng;
+  L.marker([lat, lng])
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        autoClose: false,
+        closeOnClick: false,
+        className: 'running-popup',
+      })
+    )
+    .setPopupContent('Running Workout')
+    .openPopup();
+
+  // Clear input fields
+  inputDistance.value = inputDuration.value = inputCadence.value = inputElevation.value =
+    '';
+});
+
+inputType.addEventListener('change', function () {
+  inputCadence.closest('.form__row').classList.toggle('form__row--hidden');
+  inputElevation.closest('.form__row').classList.toggle('form__row--hidden');
+});
