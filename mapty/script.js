@@ -37,10 +37,22 @@ if ('geolocation' in navigator) {
         attribution: footNote,
       }).addTo(map);
 
-      L.marker(coords)
-        .addTo(map)
-        .bindPopup('You can add any labels in here')
-        .openPopup();
+      map.on('click', function (mapEvent) {
+        const { lat, lng } = mapEvent.latlng;
+        L.marker([lat, lng])
+          .addTo(this)
+          .bindPopup(
+            L.popup({
+              maxWidth: 250,
+              minWidth: 100,
+              autoClose: false,
+              closeOnClick: false,
+              className: 'running-popup',
+            })
+          )
+          .setPopupContent('Running Workout')
+          .openPopup();
+      });
     },
     error => {
       console.log('Cold not get current position', error);
