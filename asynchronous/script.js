@@ -4,7 +4,7 @@ const btn = document.querySelector('.btn-country');
 const countriesContainer = document.querySelector('.countries');
 
 const renderError = function (msg) {
-  countriesContainer.insertAdjacentText('beforebegin', msg);
+  countriesContainer.insertAdjacentText('afterend', msg);
 };
 
 const renderCountry = function (data, className = '') {
@@ -56,17 +56,30 @@ const getCountryDataAndNeighbourXMLHttpRequest = function (country) {
   });
 };
 
+const getJSON = function (url, errorMsg = 'Something went wrong') {
+  return fetch(url).then(response => {
+    if (!response.ok) throw new Error(`${errorMsg} (${response.status})`);
+    return response.json();
+  });
+};
+
 // New Fetch API (easier to use)
 const getCountryData = function (country) {
-  fetch(`https://restcountries.eu/rest/v2/name/${country}`)
-    .then(response => response.json())
+  getJSON(
+    `https://restcountries.eu/rest/v2/name/${country}`,
+    'country not found'
+  )
     .then(([data]) => {
       renderCountry(data);
       const [neighbour] = data.borders;
-      if (!neighbour) return;
-      return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`);
+
+      if (!neighbour) throw new Error('No neighbour found');
+
+      return getJSON(
+        `https://restcountries.eu/rest/v2/alpha/${neighbour}`,
+        'country not found'
+      );
     })
-    .then(response => response.json())
     .then(data2 => renderCountry(data2, 'neighbour'))
     .catch(err => {
       renderError(`Something went wrong: ${err.message}. Try again!`);
@@ -77,5 +90,5 @@ const getCountryData = function (country) {
 };
 
 btn.addEventListener('click', function () {
-  getCountryData('japan');
+  getCountryData('australia');
 });
