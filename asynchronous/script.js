@@ -23,7 +23,7 @@ const renderCountry = function (data, className = '') {
   countriesContainer.style.opacity = 1;
 };
 
-const getCountryDataAndNeighbour = function (country) {
+const getCountryDataAndNeighbourXMLHttpRequest = function (country) {
   const request = new XMLHttpRequest();
   request.open('GET', `https://restcountries.eu/rest/v2/name/${country}`);
   request.send();
@@ -53,4 +53,14 @@ const getCountryDataAndNeighbour = function (country) {
   });
 };
 
-getCountryDataAndNeighbour('ireland');
+// New Fetch API (easier to use)
+const getCountryData = function (country) {
+  fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+    .then(response => response.json())
+    .then(([data]) => {
+      console.log(data);
+      renderCountry(data);
+    });
+};
+
+getCountryData('brazil');
