@@ -58,9 +58,13 @@ const getCountryData = function (country) {
   fetch(`https://restcountries.eu/rest/v2/name/${country}`)
     .then(response => response.json())
     .then(([data]) => {
-      console.log(data);
       renderCountry(data);
-    });
+      const [neighbour] = data.borders;
+      if (!neighbour) return;
+      return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`);
+    })
+    .then(response => response.json())
+    .then(data2 => renderCountry(data2, 'neighbour'));
 };
 
-getCountryData('brazil');
+getCountryData('BRASIL');
