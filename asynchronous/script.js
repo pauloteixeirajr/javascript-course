@@ -92,3 +92,35 @@ const getCountryData = function (country) {
 btn.addEventListener('click', function () {
   getCountryData('australia');
 });
+
+// Building a Simple Promise
+const lotteryPromise = new Promise((resolve, reject) => {
+  console.log('Lottery draw is happening: ...');
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve('You won! 💰');
+    } else {
+      reject(new Error('You lost your money 💩'));
+    }
+  }, 2000);
+});
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.log(err));
+
+// Promisifying setTimeout
+const wait = function (seconds = 1) {
+  return new Promise(resolve => {
+    setTimeout(resolve, seconds * 1000);
+  });
+};
+
+wait(2)
+  .then(() => {
+    console.log('I waited for 2 seconds');
+    return wait(5);
+  })
+  .then(() => console.log('I waited for 5 seconds'));
+
+// Creating a promise with a static method (resolves immediately)
+Promise.resolve('abc').then(x => console.log(x));
+Promise.reject('abc').catch(x => console.log(x));
