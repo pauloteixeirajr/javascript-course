@@ -227,4 +227,37 @@ const get3Countries = async function (c1, c2, c3) {
   }
 };
 
-get3Countries('portugal', 'canada', 'ireland');
+// Other Promise Combinators: race, allSettled and any
+(async function () {
+  const p1 = getJSON(
+    `https://restcountries.eu/rest/v2/name/italy?fullText=true`
+  );
+  const p2 = getJSON(
+    `https://restcountries.eu/rest/v2/name/egypt?fullText=true`
+  );
+  const p3 = getJSON(
+    `https://restcountries.eu/rest/v2/name/mexico?fullText=true`
+  );
+  // Promise.race
+  // The first promise to return is resolved (winning the race)
+  // If a promise is rejected it also wins the race
+  // A common use case is loading a timeout promise
+  // and if the resource you are trying to load takes too long
+  // the timeout function will resolve/reject first
+  // which will let the user know the request took too long
+  const res = await Promise.race([p1, p2, p3]);
+  console.log(res);
+
+  // Promise.allSettled
+  // Similar to Promise.all, but it does not short-circuit if
+  // one of the promises is rejected. Instead, it returns an array
+  // with the promise status & the value/error
+  const settled = await Promise.allSettled([p1, p2, p3]);
+  console.log(settled);
+
+  // Promise.any [ES2021]
+  // Returns the first fullfilled promise
+  // Similar to Promise.race but it ignores rejected promises
+  const anyPromise = await Promise.any([p1, p2, p3]);
+  console.log(anyPromise);
+})();
