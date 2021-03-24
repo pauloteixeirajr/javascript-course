@@ -89,10 +89,6 @@ const getCountryData = function (country) {
     });
 };
 
-btn.addEventListener('click', function () {
-  getCountryData('australia');
-});
-
 // Building a Simple Promise
 const lotteryPromise = new Promise((resolve, reject) => {
   console.log('Lottery draw is happening: ...');
@@ -124,3 +120,47 @@ wait(2)
 // Creating a promise with a static method (resolves immediately)
 Promise.resolve('abc').then(x => console.log(x));
 Promise.reject('abc').catch(x => console.log(x));
+
+// Promisifying the Geolocation API
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+
+const whereAmI = function () {
+  getPosition()
+    .then(pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    })
+    .then(response => {
+      if (!response.ok)
+        throw new Error(
+          `Wait a few seconds and try again. (${response.status})`
+        );
+      return response.json();
+    })
+    .then(location => {
+      const { city, country } = location;
+      console.log(`You are in ${city}, ${country}`);
+
+      return fetch(
+        `https://restcountries.eu/rest/v2/name/${country}?fullText=true`
+      );
+    })
+    .then(response => {
+      return response.json();
+    })
+    .then(([data]) => {
+      renderCountry(data);
+    })
+    .catch(err => console.log(err))
+    .finally(() => {
+      countriesContainer.style.opacity = 1;
+    });
+};
+
+btn.addEventListener('click', function () {
+  whereAmI();
+});
