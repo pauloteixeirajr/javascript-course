@@ -161,7 +161,27 @@ const whereAmI = function () {
     });
 };
 
-btn.addEventListener('click', function () {
-  whereAmI();
-});
 console.clear();
+
+// Consuming Promises with Async/Await
+const whereAmIAsync = async function () {
+  // Geolocation
+  const position = await getPosition();
+  const { latitude: lat, longitude: lng } = position.coords;
+
+  // Reverse Geocoding
+  const geo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+  const dataGeo = await geo.json();
+
+  // Country data
+  const res = await fetch(
+    `https://restcountries.eu/rest/v2/name/${dataGeo.country}?fullText=true`
+  );
+  const [data] = await res.json();
+  renderCountry(data);
+  countriesContainer.style.opacity = 1;
+};
+
+btn.addEventListener('click', function () {
+  whereAmIAsync();
+});
