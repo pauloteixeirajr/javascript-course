@@ -195,14 +195,36 @@ btn.addEventListener('click', function () {
   whereAmIAsync();
 });
 
-(async function () {
+// (async function () {
+//   try {
+//     console.log('1: Will get location');
+//     const city = await whereAmIAsync();
+//     console.log(`2: ${city}`);
+//   } catch (err) {
+//     console.log(`3: ${err}`);
+//   } finally {
+//     console.log('3: Finished getting location');
+//   }
+// })();
+
+const get3Countries = async function (c1, c2, c3) {
   try {
-    console.log('1: Will get location');
-    const city = await whereAmIAsync();
-    console.log(`2: ${city}`);
+    const p1 = getJSON(
+      `https://restcountries.eu/rest/v2/name/${c1}?fullText=true`
+    );
+    const p2 = getJSON(
+      `https://restcountries.eu/rest/v2/name/${c2}?fullText=true`
+    );
+    const p3 = getJSON(
+      `https://restcountries.eu/rest/v2/name/${c3}?fullText=true`
+    );
+
+    const data = await Promise.all([p1, p2, p3]);
+
+    console.log(data.map(d => d[0].capital));
   } catch (err) {
-    console.log(`3: ${err}`);
-  } finally {
-    console.log('3: Finished getting location');
+    console.log(err);
   }
-})();
+};
+
+get3Countries('portugal', 'canada', 'ireland');
