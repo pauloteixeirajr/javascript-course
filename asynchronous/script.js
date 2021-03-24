@@ -182,6 +182,8 @@ const whereAmIAsync = async function () {
     if (!res.ok) throw new Error('Problem getting country');
     const [data] = await res.json();
     renderCountry(data);
+
+    return `You are in ${dataGeo.city}, ${dataGeo.country}`;
   } catch (err) {
     renderError(`Something went wrong: ${err.message}. Try again!`);
   } finally {
@@ -192,3 +194,15 @@ const whereAmIAsync = async function () {
 btn.addEventListener('click', function () {
   whereAmIAsync();
 });
+
+(async function () {
+  try {
+    console.log('1: Will get location');
+    const city = await whereAmIAsync();
+    console.log(`2: ${city}`);
+  } catch (err) {
+    console.log(`3: ${err}`);
+  } finally {
+    console.log('3: Finished getting location');
+  }
+})();
