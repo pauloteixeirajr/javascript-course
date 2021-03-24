@@ -164,3 +164,4 @@ const whereAmI = function () {
 btn.addEventListener('click', function () {
   whereAmI();
 });
+console.clear();
