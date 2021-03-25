@@ -1,13 +1,27 @@
-// CommonJS Modules
-// Only works in NodeJS
-export.addToCart = function (product, quantity) {
-  cart.push({ product, quantity });
-  console.log(`${quantity} ${product} added to cart`);
-  console.log(`Shipping cost is ${shippingCost}`);
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+
+const state = {
+  cart: [
+    { product: 'bread', quantity: 5 },
+    { product: 'pizza', quantity: 5 },
+  ],
+  user: { logged: true },
 };
 
-// Import CommonJS
-const { addToCart } = require('./shoppingCart.js');
+const stateClone = cloneDeep(state);
+state.user.logged = false;
+console.log(stateClone);
+
+// CommonJS Modules
+// Only works in NodeJS
+// export.addToCart = function (product, quantity) {
+//   cart.push({ product, quantity });
+//   console.log(`${quantity} ${product} added to cart`);
+//   console.log(`Shipping cost is ${shippingCost}`);
+// };
+
+// // Import CommonJS
+// const { addToCart } = require('./shoppingCart.js');
 
 // The Module Pattern (old way)
 // const ShoppingCart2 = (function () {
