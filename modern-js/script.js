@@ -1,4 +1,5 @@
-import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+import cloneDeep from 'lodash-es';
 
 const state = {
   cart: [
@@ -8,7 +9,7 @@ const state = {
   user: { logged: true },
 };
 
-const stateClone = cloneDeep(state);
+const stateClone = cloneDeep.cloneDeep(state);
 state.user.logged = false;
 console.log(stateClone);
 
@@ -54,7 +55,7 @@ console.log(stateClone);
 
 // Importing module
 // Named imports
-// import { addToCart, price, quantity } from './shoppingCart.js';
+import { addToCart, price, quantity } from './shoppingCart.js';
 
 // Import everything at once
 // import * as ShoppingCart from './shoppingCart.js';
@@ -65,10 +66,13 @@ console.log(stateClone);
 // console.log('Importing module');
 // console.log(cart); throws an error
 
-// addToCart('apples', 5);
-// console.log(price, quantity);
+addToCart('apples', 5);
+console.log(price, quantity);
 
 // ShoppingCart.addToCart('bread', 5);
 // console.log(ShoppingCart.price, ShoppingCart.quantity);
 
 // add('bananas', 10);
+
+// Parcel relevant only
+if (module.hot) module.hot.accept();
