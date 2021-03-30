@@ -42,7 +42,6 @@ export const loadSearchResults = async function (query) {
         title: rec.title,
       };
     });
-    console.log(state);
   } catch (err) {
     throw err;
   }
