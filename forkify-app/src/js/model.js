@@ -1,5 +1,5 @@
 import { API_URL, RESULTS_PER_PAGE, PUBLIC_API_KEY } from './config.js';
-import { getJSON, sendJSON } from './helpers.js';
+import { AJAX } from './helpers.js';
 
 export const state = {
   recipe: {},
@@ -29,7 +29,7 @@ const createRecipeObject = function (data) {
 
 export const loadRecipe = async function (recipeId) {
   try {
-    const data = await getJSON(`${API_URL}${recipeId}`);
+    const data = await AJAX(`${API_URL}${recipeId}?key=${PUBLIC_API_KEY}`);
     state.recipe = createRecipeObject(data);
     if (state.bookmarks.some(rec => rec.id === recipeId)) {
       state.recipe.bookmarked = true;
@@ -45,13 +45,14 @@ export const loadSearchResults = async function (query) {
   try {
     state.search.query = query;
 
-    const data = await getJSON(`${API_URL}?search=${query}`);
+    const data = await AJAX(`${API_URL}?search=${query}&key=${PUBLIC_API_KEY}`);
     state.search.results = data.data.recipes.map(rec => {
       return {
         id: rec.id,
         image: rec.image_url,
         publisher: rec.publisher,
         title: rec.title,
+        ...(rec.key && { key: rec.key }),
       };
     });
     state.search.page = 1;
@@ -136,7 +137,7 @@ export const uploadRecipe = async function (newRecipe) {
       ingredients,
     };
 
-    const data = await sendJSON(`${API_URL}?key=${PUBLIC_API_KEY}`, recipe);
+    const data = await AJAX(`${API_URL}?key=${PUBLIC_API_KEY}`, recipe);
     state.recipe = createRecipeObject(data);
     addBookmark(state.recipe);
     return data;
